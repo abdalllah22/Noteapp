@@ -2,7 +2,7 @@
   "name": "task-manager",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "src/app.js",
@@ -23,5 +23,8 @@
     "nodemon": "^2.0.12",
     "sharp": "^0.28.3",
     "validator": "^13.6.0"
+  },
+  "engines": {
+    "node": "14.16.0"
   }
 }
