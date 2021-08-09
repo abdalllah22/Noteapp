@@ -206,6 +206,7 @@ router.delete('/users/me', auth, async (req,res) => {
     }
 })
 
+var storage = multer.memoryStorage();
 upload = multer({
     limits: {
         fileSize: 1000000,
@@ -215,13 +216,14 @@ upload = multer({
             cb(new Error('Please Upload a pic !!'))    
         }
         cb(undefined,true)
-    }
+    },
+    storage
 })
 
 router.post('/users/me/avatar', auth, upload.single('avatar'), async (req,res) => {
-    req.user.avatar = req.file.buffer
-    // const buffer = await sharp(req.file.buffer).resize({width: 250, height: 250}).png().toBuffer()
-    // req.user.avatar = buffer
+    // req.user.avatar = req.file.buffer ?  req.file.buffer :  null;
+    const buffer = await sharp(req.file.buffer).resize({width: 500, height: 500}).png().toBuffer()
+    req.user.avatar = buffer
     await req.user.save()
     res.send()
 }, (error,req,res,next) => {
